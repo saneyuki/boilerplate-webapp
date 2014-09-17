@@ -6,6 +6,9 @@ var sass = require("gulp-sass");
 var browserify = require("browserify");
 var espowerify = require("espowerify");
 var transform = require("vinyl-transform");
+var argv = require("yargs").argv;
+
+var isRelease = argv.release
 
 var SRC_JS = "script/main.js";
 var SRC_CSS = "style/main.scss";
@@ -14,11 +17,12 @@ var DIST_BUILD_DIR = "build/";
 var SRC_TEST = "test/manifest.js";
 var DIST_TEST_DIR = "powered-test/";
 
+
 gulp.task("css", function() {
     var option = {
         errLogToConsole: true,
         // sourcemap
-        sourceComments: "none",
+        sourceComments: isRelease ? "none" : "map",
         // "expanded" are not supported currently by libsass
         outputStyle: "expanded",
     };
@@ -31,7 +35,7 @@ gulp.task("css", function() {
 gulp.task("js", function() {
     var option = {
         insertGlobals : false,
-        debug : true,
+        debug : isRelease ? false : true,
         standalone: false,
     };
 
