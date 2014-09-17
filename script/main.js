@@ -1,3 +1,4 @@
+/** @jsx React.DOM */
 /* vim: set filetype=javascript shiftwidth=4 tabstop=4 expandtab: */
 /*
  * @license MIT License
@@ -24,3 +25,11 @@
  */
 
 "use strict";
+
+var React = require("react");
+// If you want the pre-mifinied react which has `min.js` suffix,
+// You should specify the minified react directly.
+// A file which has `min.js` suffix might be blackboxed with debugger tools.
+// var React = require("react/dist/react.min");
+
+React.renderComponent(<h1>Hello by React!</h1>, document.body);

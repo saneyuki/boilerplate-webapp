@@ -4,6 +4,7 @@
 var gulp = require("gulp");
 var sass = require("gulp-sass");
 var browserify = require("browserify");
+var reactify = require("reactify");
 var espowerify = require("espowerify");
 var transform = require("vinyl-transform");
 var argv = require("yargs").argv;
@@ -40,6 +41,7 @@ gulp.task("js", function() {
 
     var browserifier = transform(function(filename){
         var b = browserify(option).add(filename)
+                                  .transform(reactify);
         return b.bundle();
     });
 
