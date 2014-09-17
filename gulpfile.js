@@ -2,20 +2,30 @@
 "use strict";
 
 var gulp = require("gulp");
+var sass = require("gulp-sass");
 var browserify = require("browserify");
 var espowerify = require("espowerify");
 var transform = require("vinyl-transform");
 
 var SRC_JS = "script/main.js";
-var SRC_CSS = "style/**.css";
+var SRC_CSS = "style/main.scss";
 var DIST_BUILD_DIR = "build/";
 
 var SRC_TEST = "test/manifest.js";
 var DIST_TEST_DIR = "powered-test/";
 
 gulp.task("css", function() {
-  gulp.src(SRC_CSS)
-      .pipe(gulp.dest(DIST_BUILD_DIR));
+    var option = {
+        errLogToConsole: true,
+        // sourcemap
+        sourceComments: "none",
+        // "expanded" are not supported currently by libsass
+        outputStyle: "expanded",
+    };
+
+    gulp.src(SRC_CSS)
+        .pipe(sass(option))
+        .pipe(gulp.dest(DIST_BUILD_DIR));
 });
 
 gulp.task("js", function() {
