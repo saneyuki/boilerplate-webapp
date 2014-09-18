@@ -10,12 +10,12 @@ var argv = require("yargs").argv;
 
 var isRelease = argv.release
 
-var SRC_JS = "script/main.js";
-var SRC_CSS = "style/main.scss";
-var DIST_BUILD_DIR = "build/";
+var SRC_JS = "./script/main.js";
+var SRC_CSS = "./style/main.scss";
+var DIST_BUILD_DIR = "./build/";
 
-var SRC_TEST = "test/manifest.js";
-var DIST_TEST_DIR = "powered-test/";
+var SRC_TEST = "./test/manifest.js";
+var DIST_TEST_DIR = "./powered-test/";
 
 
 gulp.task("css", function() {
