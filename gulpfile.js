@@ -34,8 +34,8 @@ gulp.task("css", function() {
 
 gulp.task("js", function() {
     var option = {
-        insertGlobals : false,
-        debug : isRelease ? false : true,
+        insertGlobals: false,
+        debug: isRelease ? false : true,
     };
 
     var browserifier = transform(function(filename){
