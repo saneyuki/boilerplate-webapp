@@ -36,7 +36,6 @@ gulp.task("js", function() {
     var option = {
         insertGlobals : false,
         debug : isRelease ? false : true,
-        standalone: false,
     };
 
     var browserifier = transform(function(filename){
@@ -53,7 +52,6 @@ gulp.task("espower", function() {
     var option = {
         insertGlobals : false,
         debug : true,
-        standalone: false,
     };
 
     var browserifier = transform(function(filename){
