@@ -21,7 +21,7 @@
     "url": "YOUR REPOSITORY"
   },
   "scripts": {
-    "build-test": "node ./node_modules/.bin/gulp espower",
+    "build-test": "node ./node_modules/.bin/gulp jstest",
     "test": "npm run build-test && node ./launch_test.js"
   },
   "devDependencies": {
