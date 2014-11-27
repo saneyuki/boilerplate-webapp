@@ -20,12 +20,22 @@
     "type": "git",
     "url": "YOUR REPOSITORY"
   },
+  "scripts": {
+    "build-test": "node ./node_modules/.bin/gulp espower",
+    "test": "npm run build-test && node ./launch_test.js"
+  },
   "devDependencies": {
     "browserify": "^6.3.3",
+    "es6-promise": "^2.0.0",
     "espowerify": "^0.10.0",
     "exorcist": "^0.1.6",
     "gulp": "^3.8.9",
     "gulp-sass": "^1.2.2",
+    "karma": "^0.12.28",
+    "karma-chrome-launcher": "^0.1.5",
+    "karma-mocha": "^0.1.9",
+    "karma-mocha-reporter": "^0.3.1",
+    "mocha": "^2.0.1",
     "power-assert": "^0.10.0",
     "vinyl-transform": "^1.0.0",
     "yargs": "^1.3.2"
