@@ -23,10 +23,9 @@
  */
 'use strict';
 
+var argv = require('yargs').argv;
 var http = require('http');
 var url = require('url');
-
-var PORT = 9001;
 
 var route = {
     '/api/bar': function (res) {
@@ -49,4 +48,4 @@ http.createServer(function (req, res) {
         res.writeHead(404);
         res.end();
     }
-}).listen(PORT);
+}).listen(argv.port);
