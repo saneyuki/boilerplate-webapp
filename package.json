@@ -27,7 +27,7 @@
     "gulp": "^3.8.9",
     "gulp-sass": "^1.2.2",
     "power-assert": "^0.9.1",
-    "vinyl-transform": "0.0.1",
+    "vinyl-transform": "^1.0.0",
     "yargs": "^1.3.2"
   }
 }
