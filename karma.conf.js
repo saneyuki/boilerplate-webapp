@@ -65,7 +65,7 @@ module.exports = function(config) {
     port: 9876,
 
     proxies: {
-        "/api/": "http://localhost:9001/api"
+        '/api/': 'http://localhost:9001/api'
     },
 
     // enable / disable colors in the output (reporters and logs)
