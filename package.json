@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "YOUR PROJECT DESCRIPTION.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-test": "node ./node_modules/.bin/gulp jstest",
+    "test": "npm run build-test && node ./launch_test.js"
   },
   "author": {
     "name": "Tetsuharu OHZEKI",
@@ -19,10 +20,6 @@
   "repository": {
     "type": "git",
     "url": "YOUR REPOSITORY"
-  },
-  "scripts": {
-    "build-test": "node ./node_modules/.bin/gulp jstest",
-    "test": "npm run build-test && node ./launch_test.js"
   },
   "devDependencies": {
     "browserify": "^6.3.3",
