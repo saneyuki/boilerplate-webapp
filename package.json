@@ -20,6 +20,10 @@
     "type": "git",
     "url": "YOUR REPOSITORY"
   },
+  "scripts": {
+    "build-test": "node ./node_modules/.bin/gulp espower",
+    "test": "npm run build-test && node ./launch_test.js"
+  },
   "devDependencies": {
     "browserify": "^6.3.3",
     "es6-promise": "^2.0.0",
