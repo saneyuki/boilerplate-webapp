@@ -1,4 +1,3 @@
-/* vim: set filetype=javascript shiftwidth=4 tabstop=4 expandtab: */
 /*
  * @license MIT License
  *
@@ -22,44 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+'use strict';
 
-"use strict";
+var http = require('http');
+var url = require('url');
 
-var assert = require("power-assert");
+var PORT = 9001;
 
-describe("Hoge", function(){
-    describe("fuga", function(){
-        before(function(){
+var route = {
+    '/api/bar': function (res) {
+        res.writeHead(200, {
+            'Content-Type': 'application/json',
         });
+        res.end(JSON.stringify({
+            bar: 1,
+        }));
+    },
+};
 
-        after(function(){
-        });
-
-        it("foo bar", function(){
-            assert(true);
-        });
-    });
-});
-
-describe("Bar", function(){
-    describe("XHR", function(){
-        var result = null;
-        before(function(done){
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "/api/bar", true);
-            xhr.onload = function () {
-                result = JSON.parse(this.responseText);
-                done();
-            };
-            xhr.send();
-        });
-
-        after(function(){
-            result = null;
-        });
-
-        it("xhr", function(){
-            assert.strictEqual(result.bar, 1);
-        });
-    });
-});
+http.createServer(function (req, res) {
+    var path = url.parse(req.url).pathname;
+    var hasRoute = route.hasOwnProperty(path);
+    if (hasRoute) {
+        route[path](res);
+    }
+    else {
+        res.writeHead(404);
+        res.end();
+    }
+}).listen(PORT);
