@@ -22,7 +22,7 @@
     "url": "YOUR REPOSITORY"
   },
   "dependencies": {
-    "react": "^0.12.1"
+    "react": "^0.12.2"
   },
   "devDependencies": {
     "browserify": "^8.0.1",
