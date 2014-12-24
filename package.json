@@ -22,7 +22,7 @@
     "url": "YOUR REPOSITORY"
   },
   "devDependencies": {
-    "browserify": "^6.3.3",
+    "browserify": "^8.0.1",
     "es6-promise": "^2.0.0",
     "espowerify": "^0.10.0",
     "exorcist": "^0.1.6",
