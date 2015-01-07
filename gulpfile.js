@@ -27,6 +27,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var browserify = require('browserify');
 var espowerify = require('espowerify');
+var source = require('vinyl-source-stream');
 var transform = require('vinyl-transform');
 var exorcist = require('exorcist'); // Split sourcemap into the file.
 
@@ -40,7 +41,7 @@ var DIST_BUILD_DIR = './build/';
 var DIST_JS_MAP_FILE = DIST_BUILD_DIR + 'main.js.map';
 var DIST_CSS_MAP_FILE = DIST_BUILD_DIR + 'main.scss.map';
 
-var SRC_TEST = './test/manifest.js';
+var SRC_TEST_MANIFEST = './test/manifest.js';
 var DIST_TEST_DIR = './powered-test/';
 
 
@@ -69,18 +70,10 @@ gulp.task('js', function() {
         debug: isRelease ? false : true,
     };
 
-    var browserifier = transform(function(filename){
-        var b = browserify(option).add(filename)
-        return b.bundle();
-    });
-
-    var exorcister = transform(function(){
-        return exorcist(DIST_JS_MAP_FILE);
-    });
-
-    gulp.src(SRC_JS)
-        .pipe(browserifier)
-        .pipe(exorcister)
+    browserify(SRC_JS, option)
+        .bundle()
+        .pipe(exorcist(DIST_JS_MAP_FILE))
+        .pipe(source('bundle.js'))
         .pipe(gulp.dest(DIST_BUILD_DIR));
 });
 
@@ -90,14 +83,10 @@ gulp.task('espower', function() {
         debug : true,
     };
 
-    var browserifier = transform(function(filename){
-        var b = browserify(option).add(filename)
-                                  .transform(espowerify);
-        return b.bundle();
-    });
-
-    gulp.src(SRC_TEST)
-        .pipe(browserifier)
+    browserify(SRC_TEST_MANIFEST, option)
+        .transform(espowerify)
+        .bundle()
+        .pipe(source('bundle.js'))
         .pipe(gulp.dest(DIST_TEST_DIR));
 });
 
