@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "YOUR PROJECT DESCRIPTION.",
   "scripts": {
-    "build-test": "node ./node_modules/.bin/gulp jstest",
+    "build-test": "node $(npm bin)/gulp jstest",
     "test": "npm run build-test && node ./launch_test.js"
   },
   "author": {
