@@ -66,6 +66,7 @@ gulp.task('js', function() {
 
     browserify(SRC_JS, option)
         .transform(reactify)
+        .bundle()
         .pipe(exorcist(DIST_JS_MAP_FILE))
         .pipe(source('bundle.js'))
         .pipe(gulp.dest(DIST_BUILD_DIR));
