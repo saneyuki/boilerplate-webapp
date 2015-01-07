@@ -29,7 +29,6 @@ var browserify = require('browserify');
 var reactify = require('reactify');
 var espowerify = require('espowerify');
 var source = require('vinyl-source-stream');
-var transform = require('vinyl-transform');
 var exorcist = require('exorcist'); // Split sourcemap into the file.
 
 var argv = require('yargs').argv;
@@ -40,7 +39,6 @@ var SRC_JS = './script/main.js';
 var SRC_CSS = './style/main.scss';
 var DIST_BUILD_DIR = './build/';
 var DIST_JS_MAP_FILE = DIST_BUILD_DIR + 'main.js.map';
-var DIST_CSS_MAP_FILE = DIST_BUILD_DIR + 'main.scss.map';
 
 var SRC_TEST_MANIFEST = './test/manifest.js';
 var DIST_TEST_DIR = './powered-test/';
@@ -55,13 +53,8 @@ gulp.task('css', function() {
         outputStyle: 'expanded',
     };
 
-    var exorcister = transform(function(){
-        return exorcist(DIST_CSS_MAP_FILE);
-    });
-
     gulp.src(SRC_CSS)
         .pipe(sass(option))
-        .pipe(exorcister)
         .pipe(gulp.dest(DIST_BUILD_DIR));
 });
 
