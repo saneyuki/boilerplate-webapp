@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "YOUR PROJECT DESCRIPTION.",
   "scripts": {
-    "build-test": "node ./node_modules/.bin/gulp jstest",
+    "build-test": "node $(npm bin)/gulp jstest",
     "test": "npm run build-test && node ./launch_test.js"
   },
   "author": {
@@ -38,6 +38,7 @@
     "mocha": "^2.1.0",
     "power-assert": "^0.10.0",
     "reactify": "^0.17.1",
+    "vinyl-source-stream": "^1.0.0",
     "vinyl-transform": "^1.0.0",
     "yargs": "^1.3.3"
   }
