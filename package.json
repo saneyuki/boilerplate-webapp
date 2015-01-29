@@ -22,12 +22,12 @@
     "url": "YOUR REPOSITORY"
   },
   "devDependencies": {
-    "browserify": "^8.0.1",
+    "browserify": "^8.1.1",
     "es6-promise": "^2.0.1",
     "espowerify": "^0.10.0",
     "exorcist": "^0.1.6",
     "gulp": "^3.8.10",
-    "gulp-sass": "^1.2.4",
+    "gulp-sass": "^1.3.2",
     "karma": "^0.12.28",
     "karma-chrome-launcher": "^0.1.7",
     "karma-mocha": "^0.1.10",
