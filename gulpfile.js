@@ -78,7 +78,8 @@ gulp.task('espower', function() {
         debug : true,
     };
 
-    browserify(SRC_TEST_MANIFEST, option)
+    browserify(option)
+        .add(SRC_TEST_MANIFEST)
         .transform(espowerify)
         .bundle()
         .pipe(source('bundle.js'))
