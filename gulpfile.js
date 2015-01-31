@@ -60,7 +60,7 @@ gulp.task('css', function() {
 
 gulp.task('jslint', function(){
     var option = {
-        useEslintrc: true ,
+        useEslintrc: true,
     };
 
     return gulp.src([

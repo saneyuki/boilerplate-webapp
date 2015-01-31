@@ -14,7 +14,7 @@ rules:
     no-debugger: 1
     no-extra-boolean-cast: 0
     no-extra-parens: 0
-    valid-jsdoc: 2
+    valid-jsdoc: [2, { requireReturn: true, requireParamDescription: true}]
 
     # Best Practices
     block-scoped-var: 1
@@ -23,14 +23,16 @@ rules:
     no-caller: 1
     no-div-regex: 2
     no-eq-null: 2
+    no-unused-expressions: 2
     radix: 2
 
     # Strict Mode
-    strict: [2, "global"]
+    strict: 2
 
     # Variables
     no-shadow: 0
     no-unused-vars: 0
+    no-use-before-define: 0
 
     # Node.js
     no-process-exit: 0
