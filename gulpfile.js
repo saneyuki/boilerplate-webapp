@@ -26,14 +26,15 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var browserify = require('browserify');
-var reactify = require('reactify');
+var eslint = require('gulp-eslint');
 var espowerify = require('espowerify');
+var reactify = require('reactify');
 var source = require('vinyl-source-stream');
 var exorcist = require('exorcist'); // Split sourcemap into the file.
 
 var argv = require('yargs').argv;
 
-var isRelease = argv.release
+var isRelease = argv.release;
 
 var SRC_JS = './script/main.js';
 var SRC_CSS = './style/main.scss';
@@ -58,7 +59,23 @@ gulp.task('css', function() {
         .pipe(gulp.dest(DIST_BUILD_DIR));
 });
 
-gulp.task('js', function() {
+gulp.task('jslint', function(){
+    var option = {
+        useEslintrc: true ,
+    };
+
+    return gulp.src([
+        './gulpfile.js',
+        './launch_test.js',
+        './script/**/*.js',
+        './test/**/*.js',
+        './test_mock/**/*.js'])
+        .pipe(eslint(option))
+        .pipe(eslint.format())
+        .pipe(eslint.failOnError());
+});
+
+gulp.task('js', ['jslint'], function() {
     var option = {
         insertGlobals: false,
         debug: isRelease ? false : true,
@@ -74,8 +91,8 @@ gulp.task('js', function() {
 
 gulp.task('espower', function() {
     var option = {
-        insertGlobals : false,
-        debug : true,
+        insertGlobals: false,
+        debug: true,
     };
 
     browserify(option)

@@ -24,9 +24,9 @@
  * THE SOFTWARE.
  */
 
-"use strict";
+'use strict';
 
-var React = require("react");
+var React = require('react');
 // If you want the pre-mifinied react which has `min.js` suffix,
 // You should specify the minified react directly.
 // A file which has `min.js` suffix might be blackboxed with debugger tools.
