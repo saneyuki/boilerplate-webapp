@@ -26,3 +26,4 @@
 'use strict';
 
 require('./test_bar');
+require('./store/test_ResourceStore');

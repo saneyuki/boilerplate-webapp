@@ -25,7 +25,8 @@
     "url": "YOUR REPOSITORY"
   },
   "dependencies": {
-    "react": "^0.13.0"
+    "react": "^0.13.0",
+    "whatwg-fetch": "^0.7.0"
   },
   "devDependencies": {
     "browserify": "^9.0.3",
@@ -42,6 +43,7 @@
     "karma-mocha-reporter": "^1.0.0",
     "mocha": "^2.2.1",
     "power-assert": "^0.10.0",
+    "promise-test-helper": "^0.2.1",
     "reactify": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "yargs": "^3.5.3"

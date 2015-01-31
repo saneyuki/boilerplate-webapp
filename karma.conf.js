@@ -41,6 +41,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+        './node_modules/whatwg-fetch/fetch.js',
         './powered-test/**/*.js'
     ],
 
@@ -65,7 +66,8 @@ module.exports = function(config) {
     port: 9876,
 
     proxies: {
-        '/api/': 'http://localhost:9001/api'
+        '/api/': 'http://localhost:9001/api',
+        '/test/': 'http://localhost:9001/test',
     },
 
     // enable / disable colors in the output (reporters and logs)

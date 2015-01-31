@@ -26,6 +26,7 @@
 var argv = require('yargs').argv;
 var http = require('http');
 var url = require('url');
+var ResourceStoreMock = require('./mock_resouce_store');
 
 var route = {
     '/api/bar': function (res) {
@@ -38,11 +39,34 @@ var route = {
     },
 };
 
+
+/*
+ *  Test for ResourceStore:
+ */
+var RESOUCE_STORE_PATH_PREFIX = '/test/resource_store';
+route[RESOUCE_STORE_PATH_PREFIX + '/get_200/'] = ResourceStoreMock.get200;
+route[RESOUCE_STORE_PATH_PREFIX + '/get_200_json/'] = ResourceStoreMock.get200JSON;
+
+route[RESOUCE_STORE_PATH_PREFIX + '/get_300/'] = ResourceStoreMock.get300;
+route[RESOUCE_STORE_PATH_PREFIX + '/get_300_json/'] = ResourceStoreMock.get300JSON;
+
+route[RESOUCE_STORE_PATH_PREFIX + '/get_400/'] = ResourceStoreMock.get400;
+route[RESOUCE_STORE_PATH_PREFIX + '/get_400_json/'] = ResourceStoreMock.get400JSON;
+
+route[RESOUCE_STORE_PATH_PREFIX + '/get_500/'] = ResourceStoreMock.get500;
+route[RESOUCE_STORE_PATH_PREFIX + '/get_500_json/'] = ResourceStoreMock.get500JSON;
+
+route[RESOUCE_STORE_PATH_PREFIX + '/get_200_broken_json/'] = ResourceStoreMock.get200BrokenJSON;
+route[RESOUCE_STORE_PATH_PREFIX + '/get_400_broken_json/'] = ResourceStoreMock.get400BrokenJSON;
+
+/*
+ *  Server
+ */
 http.createServer(function (req, res) {
     var path = url.parse(req.url).pathname;
-    var hasRoute = route.hasOwnProperty(path);
+    var hasRoute = path in route;
     if (hasRoute) {
-        route[path](res);
+        route[path](res, req);
     }
     else {
         res.writeHead(404);
