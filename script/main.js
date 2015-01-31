@@ -23,4 +23,4 @@
  * THE SOFTWARE.
  */
 
-"use strict";
+'use strict';

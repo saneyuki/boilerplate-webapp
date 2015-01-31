@@ -23,6 +23,6 @@
  * THE SOFTWARE.
  */
 
-"use strict";
+'use strict';
 
-require("./test_bar");
+require('./test_bar');

@@ -23,30 +23,30 @@
  * THE SOFTWARE.
  */
 
-"use strict";
+'use strict';
 
-var assert = require("power-assert");
+var assert = require('power-assert');
 
-describe("Hoge", function(){
-    describe("fuga", function(){
+describe('Hoge', function(){
+    describe('fuga', function(){
         before(function(){
         });
 
         after(function(){
         });
 
-        it("foo bar", function(){
+        it('foo bar', function(){
             assert(true);
         });
     });
 });
 
-describe("Bar", function(){
-    describe("XHR", function(){
+describe('Bar', function(){
+    describe('XHR', function(){
         var result = null;
         before(function(done){
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "/api/bar", true);
+            xhr.open('GET', '/api/bar', true);
             xhr.onload = function () {
                 result = JSON.parse(this.responseText);
                 done();
@@ -58,7 +58,7 @@ describe("Bar", function(){
             result = null;
         });
 
-        it("xhr", function(){
+        it('xhr', function(){
             assert.strictEqual(result.bar, 1);
         });
     });
