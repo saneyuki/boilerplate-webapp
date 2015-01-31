@@ -1,6 +1,6 @@
 ---
-settings:
-    blockBindings: 0
+ecmaFeatures:
+    blockBindings: true
 
 env:
     browser: true
