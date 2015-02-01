@@ -101,5 +101,5 @@ gulp.task('espower', function() {
         .pipe(gulp.dest(DIST_TEST_DIR));
 });
 
-gulp.task('jstest', ['espower'], function() {});
+gulp.task('jstest', ['espower', 'jslint'], function() {});
 gulp.task('build', ['css', 'js'], function() {});
