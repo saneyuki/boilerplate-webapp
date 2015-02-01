@@ -24,7 +24,26 @@
 
 'use strict';
 
-var ResourceStore = {
+var assign = require('object-assign');
+var EventEmitter = require('events').EventEmitter;
+
+var AUTH_ERROR_EVENT = 'ResourceStore::AuthError';
+
+var ResourceStore = assign(new EventEmitter(), {
+
+    AUTH_ERROR_EVENT: AUTH_ERROR_EVENT,
+
+    emitAuthError: function() {
+        this.emit(AUTH_ERROR_EVENT);
+    },
+
+    addAuthErrorListener: function(callback) {
+        this.addListener(AUTH_ERROR_EVENT, callback);
+    },
+
+    removeAuthErrorListener: function(callback) {
+        this.removeListener(AUTH_ERROR_EVENT, callback);
+    },
 
     /*
      *  @param  {string}    url
@@ -65,7 +84,7 @@ var ResourceStore = {
             },
         });
     },
-};
+});
 
 /*
  *  @param  {string}    url
@@ -100,6 +119,11 @@ var checkStatus = function (res) {
         return Promise.resolve(res);
     }
     else {
+        // Test whether the request has the permission to access the resource.
+        if (status === 403) {
+            ResourceStore.emitAuthError();
+        }
+
         return Promise.reject(res);
     }
 };

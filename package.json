@@ -25,6 +25,7 @@
     "url": "YOUR REPOSITORY"
   },
   "dependencies": {
+    "object-assign": "^2.0.0",
     "react": "^0.13.0",
     "whatwg-fetch": "^0.7.0"
   },

@@ -59,6 +59,10 @@ route[RESOUCE_STORE_PATH_PREFIX + '/get_500_json/'] = ResourceStoreMock.get500JS
 route[RESOUCE_STORE_PATH_PREFIX + '/get_200_broken_json/'] = ResourceStoreMock.get200BrokenJSON;
 route[RESOUCE_STORE_PATH_PREFIX + '/get_400_broken_json/'] = ResourceStoreMock.get400BrokenJSON;
 
+route[RESOUCE_STORE_PATH_PREFIX + '/get_403/'] = ResourceStoreMock.get403;
+route[RESOUCE_STORE_PATH_PREFIX + '/get_403_json/'] = ResourceStoreMock.get403JSON;
+route[RESOUCE_STORE_PATH_PREFIX + '/get_403_broken_json/'] = ResourceStoreMock.get403BrokenJSON;
+
 /*
  *  Server
  */

@@ -99,4 +99,25 @@ module.exports = Object.freeze({
         });
         res.end('{,,,,,}');
     },
+
+    get403: function (res) {
+        res.writeHead(403, {
+            'Content-Type': MIME_TEXT,
+        });
+        res.end('get-403-expected');
+    },
+    get403JSON: function (res) {
+        res.writeHead(403, {
+            'Content-Type': MIME_JSON,
+        });
+        res.end(JSON.stringify({
+            value: 'get-403-json',
+        }));
+    },
+    get403BrokenJSON: function (res) {
+        res.writeHead(403, {
+            'Content-Type': MIME_JSON,
+        });
+        res.end('{,,,,,}');
+    },
 });
