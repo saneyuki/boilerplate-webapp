@@ -35,7 +35,7 @@
         "radix": 2,
 
         // Strict Mode
-        "strict": 2,
+        "strict": [2, "global"],
 
         // Variables
         "no-shadow": 0,
