@@ -46,6 +46,9 @@
         "no-process-exit": 0,
 
         // Stylistic Issues
+        "indent": [2, 4, {
+            "indentSwitchCase": true
+        }],
         "comma-spacing": [2, {
             "before": false,
             "after": true
