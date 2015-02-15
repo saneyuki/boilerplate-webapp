@@ -66,9 +66,5 @@
 
         // ECMAScript 6
         "generator-star": [2, "start"]
-    },
-
-    "globals": {
-        "Promise": true
     }
 }

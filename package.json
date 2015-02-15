@@ -32,7 +32,6 @@
   },
   "devDependencies": {
     "browserify": "^8.1.1",
-    "es6-promise": "^2.0.1",
     "espowerify": "^0.10.0",
     "exorcist": "^0.1.6",
     "gulp": "^3.8.11",

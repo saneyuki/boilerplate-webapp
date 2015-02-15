@@ -28,7 +28,6 @@ var argv = require('yargs').argv;
 var ChildProcess = require('child_process');
 var EventEmitter = require('events').EventEmitter;
 var Path = require('path');
-var Promise = require('es6-promise').Promise;
 
 var MOCK_PORT = 9001;
 
