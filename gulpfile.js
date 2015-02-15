@@ -61,7 +61,7 @@ gulp.task('css', function() {
 
 gulp.task('jslint', function(){
     var option = {
-        useEslintrc: true ,
+        useEslintrc: true,
     };
 
     return gulp.src([
@@ -103,5 +103,5 @@ gulp.task('espower', function() {
         .pipe(gulp.dest(DIST_TEST_DIR));
 });
 
-gulp.task('jstest', ['espower'], function() {});
+gulp.task('jstest', ['espower', 'jslint'], function() {});
 gulp.task('build', ['css', 'js'], function() {});

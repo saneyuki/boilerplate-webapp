@@ -3,8 +3,14 @@
   "version": "0.0.0",
   "description": "YOUR PROJECT DESCRIPTION.",
   "scripts": {
-    "build-test": "node $(npm bin)/gulp jstest",
-    "test": "npm run build-test && node ./launch_test.js"
+    "preinstall": "rm -rf ./node_modules",
+
+    "lint": "node $(npm bin)/gulp jslint",
+    "build": "node $(npm bin)/gulp build",
+
+    "pretest": "node $(npm bin)/gulp jstest",
+    "test": "node ./launch_test.js",
+    "posttest": "rm -rf ./powered-test/"
   },
   "author": {
     "name": "Tetsuharu OHZEKI",
@@ -29,9 +35,9 @@
     "es6-promise": "^2.0.1",
     "espowerify": "^0.10.0",
     "exorcist": "^0.1.6",
-    "gulp": "^3.8.10",
-    "gulp-eslint": "^0.2.2",
-    "gulp-sass": "^1.3.2",
+    "gulp": "^3.8.11",
+    "gulp-eslint": "^0.4.2",
+    "gulp-sass": "^1.3.3",
     "karma": "^0.12.28",
     "karma-chrome-launcher": "^0.1.7",
     "karma-mocha": "^0.1.10",
@@ -40,6 +46,6 @@
     "power-assert": "^0.10.0",
     "reactify": "^0.17.1",
     "vinyl-source-stream": "^1.0.0",
-    "yargs": "^1.3.3"
+    "yargs": "^3.0.4"
   }
 }
