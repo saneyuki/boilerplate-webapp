@@ -5,7 +5,6 @@
   "scripts": {
     "lint": "node $(npm bin)/gulp jslint",
     "build": "node $(npm bin)/gulp build",
-
     "pretest": "node $(npm bin)/gulp jstest",
     "test": "node ./launch_test.js",
     "posttest": "rm -rf ./powered-test/"
@@ -30,6 +29,7 @@
   },
   "devDependencies": {
     "browserify": "^8.1.1",
+    "envify": "^3.2.0",
     "espowerify": "^0.10.0",
     "exorcist": "^0.1.6",
     "gulp": "^3.8.11",

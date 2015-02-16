@@ -40,3 +40,10 @@ var HelloComponent = React.createClass({
 var Hello = React.createFactory(HelloComponent);
 
 React.render(<Hello/>, document.body);
+
+if (process.env.NODE_ENV === 'development') {
+    console.log('development only');
+}
+else {
+    console.log('production only');
+}
