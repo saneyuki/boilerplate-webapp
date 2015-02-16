@@ -23,3 +23,10 @@
  */
 
 'use strict';
+
+if (process.env.NODE_ENV === 'development') {
+    console.log('development only');
+}
+else {
+    console.log('production only');
+}

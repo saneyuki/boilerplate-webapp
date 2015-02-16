@@ -23,6 +23,7 @@
  */
 'use strict';
 
+var envify = require('envify/custom');
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var browserify = require('browserify');
@@ -81,6 +82,9 @@ gulp.task('js', ['jslint'], function() {
     };
 
     browserify(SRC_JS, option)
+        .transform(envify({
+            NODE_ENV: isRelease ? 'production' : 'development',
+        }))
         .bundle()
         .pipe(exorcist(DIST_JS_MAP_FILE))
         .pipe(source('bundle.js'))
