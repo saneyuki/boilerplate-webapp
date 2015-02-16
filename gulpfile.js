@@ -23,7 +23,7 @@
  */
 'use strict';
 
-var envify = require('envify/custom');
+var envify = require('envify');
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var browserify = require('browserify');
@@ -32,9 +32,7 @@ var espowerify = require('espowerify');
 var source = require('vinyl-source-stream');
 var exorcist = require('exorcist'); // Split sourcemap into the file.
 
-var argv = require('yargs').argv;
-
-var isRelease = argv.release;
+var isRelease = process.env.NODE_ENV === 'production';
 
 var SRC_JS = './script/main.js';
 var SRC_CSS = './style/main.scss';
@@ -43,7 +41,6 @@ var DIST_JS_MAP_FILE = DIST_BUILD_DIR + 'main.js.map';
 
 var SRC_TEST_MANIFEST = './test/manifest.js';
 var DIST_TEST_DIR = './powered-test/';
-
 
 gulp.task('css', function() {
     var option = {
@@ -82,9 +79,7 @@ gulp.task('js', ['jslint'], function() {
     };
 
     browserify(SRC_JS, option)
-        .transform(envify({
-            NODE_ENV: isRelease ? 'production' : 'development',
-        }))
+        .transform(envify)
         .bundle()
         .pipe(exorcist(DIST_JS_MAP_FILE))
         .pipe(source('bundle.js'))

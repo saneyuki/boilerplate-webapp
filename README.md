@@ -2,5 +2,5 @@
 
 ## build
 
-* `npm run build -- --release`: production build
-* `npm run build`: development build
+* `env NODE_ENV=production npm run build`: production build
+* `env NODE_ENV=development npm run build`: development build
