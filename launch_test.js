@@ -27,6 +27,7 @@
 var argv = require('yargs').argv;
 var ChildProcess = require('child_process');
 var EventEmitter = require('events').EventEmitter;
+var os = require('os');
 var Path = require('path');
 
 var MOCK_PORT = 9001;
@@ -60,7 +61,8 @@ if (argv.onlyMock) {
     karma = Promise.resolve();
 }
 else {
-    var karmaBin = Path.join(__dirname, 'node_modules', 'karma', 'bin', 'karma');
+    let suffix = (os.platform() === 'win32') ? '.cmd' : '';
+    let karmaBin = Path.join(__dirname, 'node_modules', '.bin', 'karma' + suffix);
     karma = spawn(karmaBin, ['start', (argv.debug ? '' : '--single-run')]);
 }
 
