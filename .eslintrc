@@ -14,7 +14,7 @@
 
     "rules": {
         // Possible Errors
-        "no-comma-dangle": 0,
+        "comma-dangle": [0, "never"],
         "no-constant-condition": 1,
         "no-debugger": 1,
         "no-extra-boolean-cast": 0,
