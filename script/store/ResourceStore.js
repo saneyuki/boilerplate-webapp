@@ -120,6 +120,10 @@ var ResourceStore = assign(new EventEmitter(), {
  *      5. Return `p2`.
  */
 var fetchResource = function (url, option) {
+    // Enable credential mode to send a cookie.
+    // see: https://fetch.spec.whatwg.org/#concept-request-credentials-mode
+    option.credentials = 'same-origin';
+
     var request = window.fetch(url, option)
                         .then(checkStatus);
     return request;

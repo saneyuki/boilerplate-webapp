@@ -23,6 +23,8 @@
  */
 'use strict';
 
+let cookie = require('cookie');
+
 const HEADER_CONTENT_TYPE = 'Content-Type';
 const MIME_TEXT = 'text/plain';
 const MIME_JSON = 'application/json';
@@ -62,6 +64,37 @@ module.exports = function (app) {
     app.get(PATH_PREFIX + '/get_403_broken_json/', function (req, res) {
         res.status(403).header(HEADER_CONTENT_TYPE, MIME_JSON)
             .send('{,,,,,}');
+    });
+
+    // credentials
+    const CREDENTIAL_TEST = 'ResourceStore_test_credential';
+    const CREDENTIAL_VAL = String(Date.now());
+    const credentialOption = Object.freeze({
+        httpOnly: true,
+    });
+    app.get(PATH_PREFIX + '/credentials/create/', function (req, res) {
+        res.cookie(CREDENTIAL_TEST, CREDENTIAL_VAL, credentialOption);
+        res.status(200).send();
+    });
+    app.get(PATH_PREFIX + '/credentials/confirm/', function (req, res) {
+        let rawCookie = req.header('Cookie');
+        if (!rawCookie) {
+            res.status(403).send();
+            return;
+        }
+
+        let credentials = cookie.parse(rawCookie);
+
+        if (credentials[CREDENTIAL_TEST] === CREDENTIAL_VAL) {
+            res.status(200).send();
+        }
+        else {
+            res.status(403).send();
+        }
+    });
+    app.get(PATH_PREFIX + '/credentials/clear/', function (req, res) {
+        res.clearCookie(CREDENTIAL_TEST, credentialOption);
+        res.status(200).send();
     });
 
     // post:
