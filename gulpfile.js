@@ -23,15 +23,15 @@
  */
 'use strict';
 
-let envify = require('envify');
-let gulp = require('gulp');
-let sass = require('gulp-sass');
 let browserify = require('browserify');
 let eslint = require('gulp-eslint');
 let espowerify = require('espowerify');
-let reactify = require('reactify');
-let source = require('vinyl-source-stream');
+let envify = require('envify');
 let exorcist = require('exorcist'); // Split sourcemap into the file.
+let gulp = require('gulp');
+let reactify = require('reactify');
+let sass = require('gulp-sass');
+let source = require('vinyl-source-stream');
 
 const isRelease = process.env.NODE_ENV === 'production';
 
