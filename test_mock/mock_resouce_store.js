@@ -23,101 +23,44 @@
  */
 'use strict';
 
-var MIME_TEXT = 'text/plain';
-var MIME_JSON = 'application/json';
+const HEADER_CONTENT_TYPE = 'Content-Type';
+const MIME_TEXT = 'text/plain';
+const MIME_JSON = 'application/json';
 
-module.exports = Object.freeze({
-    get200: function (res) {
-        res.writeHead(200, {
-            'Content-Type': MIME_TEXT,
-        });
-        res.end('get-200-expected');
-    },
-    get200JSON: function (res) {
-        res.writeHead(200, {
-            'Content-Type': MIME_JSON,
-        });
-        res.end(JSON.stringify({
-            value: 'get-200-json',
-        }));
-    },
+const PATH_PREFIX = '/test/resource_store';
 
-    get300: function (res) {
-        res.writeHead(300, {
-            'Content-Type': MIME_TEXT,
-        });
-        res.end('get-300-expected');
-    },
-    get300JSON: function (res) {
-        res.writeHead(300, {
-            'Content-Type': MIME_JSON,
-        });
-        res.end(JSON.stringify({
-            value: 'get-300-json',
-        }));
-    },
+/*
+ *  Test for ResourceStore:
+ */
+module.exports = function (app) {
+    // get
+    [200, 300, 400, 500, 403].forEach(function(n){
+        let num = String(n);
 
-    get400: function (res) {
-        res.writeHead(400, {
-            'Content-Type': MIME_TEXT,
+        app.get(PATH_PREFIX + '/get_' + num + '/', function (req, res) {
+            res.status(num).header(HEADER_CONTENT_TYPE, MIME_TEXT)
+                .send('get-' + num + '-expected');
         });
-        res.end('get-400-expected');
-    },
-    get400JSON: function (res) {
-        res.writeHead(400, {
-            'Content-Type': MIME_JSON,
-        });
-        res.end(JSON.stringify({
-            value: 'get-400-json',
-        }));
-    },
 
-    get500: function (res) {
-        res.writeHead(500, {
-            'Content-Type': MIME_TEXT,
+        app.get(PATH_PREFIX + '/get_' + num + '_json/', function (req, res) {
+            let val = JSON.stringify({
+                value: 'get-' + num + '-json',
+            });
+            res.status(num).header(HEADER_CONTENT_TYPE, MIME_JSON)
+                .send(val);
         });
-        res.end('get-500-expected');
-    },
-    get500JSON: function (res) {
-        res.writeHead(500, {
-            'Content-Type': MIME_JSON,
-        });
-        res.end(JSON.stringify({
-            value: 'get-500-json',
-        }));
-    },
+    });
 
-    get200BrokenJSON: function (res) {
-        res.writeHead(200, {
-            'Content-Type': MIME_JSON,
-        });
-        res.end('{,,,,,}');
-    },
-    get400BrokenJSON: function (res) {
-        res.writeHead(400, {
-            'Content-Type': MIME_JSON,
-        });
-        res.end('{,,,,,}');
-    },
-
-    get403: function (res) {
-        res.writeHead(403, {
-            'Content-Type': MIME_TEXT,
-        });
-        res.end('get-403-expected');
-    },
-    get403JSON: function (res) {
-        res.writeHead(403, {
-            'Content-Type': MIME_JSON,
-        });
-        res.end(JSON.stringify({
-            value: 'get-403-json',
-        }));
-    },
-    get403BrokenJSON: function (res) {
-        res.writeHead(403, {
-            'Content-Type': MIME_JSON,
-        });
-        res.end('{,,,,,}');
-    },
-});
+    app.get(PATH_PREFIX + '/get_200_broken_json/', function (req, res) {
+        res.status(200).header(HEADER_CONTENT_TYPE, MIME_JSON)
+            .send('{,,,,,}');
+    });
+    app.get(PATH_PREFIX + '/get_400_broken_json/', function (req, res) {
+        res.status(400).header(HEADER_CONTENT_TYPE, MIME_JSON)
+            .send('{,,,,,}');
+    });
+    app.get(PATH_PREFIX + '/get_403_broken_json/', function (req, res) {
+        res.status(403).header(HEADER_CONTENT_TYPE, MIME_JSON)
+            .send('{,,,,,}');
+    });
+};
