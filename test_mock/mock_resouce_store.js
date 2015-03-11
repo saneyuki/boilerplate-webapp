@@ -63,4 +63,50 @@ module.exports = function (app) {
         res.status(403).header(HEADER_CONTENT_TYPE, MIME_JSON)
             .send('{,,,,,}');
     });
+
+    // post:
+    [200, 300, 400, 500, 403].forEach(function(n){
+        let num = String(n);
+
+        app.post(PATH_PREFIX + '/post_' + num + '/', function (req, res) {
+            if (!req.is(MIME_JSON)) {
+                res.status(400)
+                    .header(HEADER_CONTENT_TYPE, MIME_JSON)
+                    .json({
+                        isValid: false,
+                        reason: 'invalid content type',
+                    });
+                return;
+            }
+
+            if (!req.accepts(MIME_JSON)) {
+                res.status(400)
+                    .header(HEADER_CONTENT_TYPE, MIME_JSON)
+                    .json({
+                        isValid: false,
+                        reason: 'invalid accept type',
+                    });
+                return;
+            }
+
+            let payload = req.body;
+            if (payload.val !== n) {
+                let reason = 'invalid val: ' + String(payload.val) + ', expected: ' + String(num);
+                res.status(400)
+                    .header(HEADER_CONTENT_TYPE, MIME_JSON)
+                    .json({
+                        isValid: false,
+                        val: payload.val,
+                        reason: reason,
+                    });
+                return;
+            }
+
+            res.status(num)
+                .header(HEADER_CONTENT_TYPE, MIME_JSON)
+                .json({
+                    isValid: true,
+                });
+        });
+    });
 };

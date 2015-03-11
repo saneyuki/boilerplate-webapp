@@ -84,6 +84,24 @@ var ResourceStore = assign(new EventEmitter(), {
             },
         });
     },
+
+    /*
+     *  @param  {string}    url
+     *  @param  {string}    contentType
+     *  @param  {any}       body
+     *
+     *  @return {Promise<Response>}
+     */
+    post: function (url, contentType, body) {
+        return fetchResource(url, {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': contentType,
+            },
+            body: body,
+        });
+    },
 });
 
 /*

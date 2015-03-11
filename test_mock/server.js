@@ -24,11 +24,17 @@
 'use strict';
 
 let argv = require('yargs').argv;
+let bodyParser = require('body-parser');
 let express = require('express');
 
 const PORT = argv.port;
 
 let app = express();
+app.use(bodyParser.json());
+
+/*
+ *  Routing
+ */
 app.get('/api/bar', function(req, res){
     res.header('Content-Type', 'application/json')
         .status(200)
