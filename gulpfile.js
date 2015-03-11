@@ -23,28 +23,28 @@
  */
 'use strict';
 
-var envify = require('envify');
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var browserify = require('browserify');
-var eslint = require('gulp-eslint');
-var espowerify = require('espowerify');
-var reactify = require('reactify');
-var source = require('vinyl-source-stream');
-var exorcist = require('exorcist'); // Split sourcemap into the file.
+let envify = require('envify');
+let gulp = require('gulp');
+let sass = require('gulp-sass');
+let browserify = require('browserify');
+let eslint = require('gulp-eslint');
+let espowerify = require('espowerify');
+let reactify = require('reactify');
+let source = require('vinyl-source-stream');
+let exorcist = require('exorcist'); // Split sourcemap into the file.
 
-var isRelease = process.env.NODE_ENV === 'production';
+const isRelease = process.env.NODE_ENV === 'production';
 
-var SRC_JS = './script/main.js';
-var SRC_CSS = './style/main.scss';
-var DIST_BUILD_DIR = './build/';
-var DIST_JS_MAP_FILE = DIST_BUILD_DIR + 'main.js.map';
+const SRC_JS = './script/main.js';
+const SRC_CSS = './style/main.scss';
+const DIST_BUILD_DIR = './build/';
+const DIST_JS_MAP_FILE = DIST_BUILD_DIR + 'main.js.map';
 
-var SRC_TEST_MANIFEST = './test/manifest.js';
-var DIST_TEST_DIR = './powered-test/';
+const SRC_TEST_MANIFEST = './test/manifest.js';
+const DIST_TEST_DIR = './powered-test/';
 
 gulp.task('css', function() {
-    var option = {
+    let option = {
         errLogToConsole: true,
         // sourcemap
         sourceComments: isRelease ? 'none' : 'map',
@@ -58,7 +58,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('jslint', function(){
-    var option = {
+    let option = {
         useEslintrc: true,
     };
 
@@ -74,7 +74,7 @@ gulp.task('jslint', function(){
 });
 
 gulp.task('js', ['jslint'], function() {
-    var option = {
+    let option = {
         insertGlobals: false,
         debug: isRelease ? false : true,
     };
@@ -89,7 +89,7 @@ gulp.task('js', ['jslint'], function() {
 });
 
 gulp.task('espower', function() {
-    var option = {
+    let option = {
         insertGlobals: false,
         debug: true,
     };
