@@ -31,15 +31,15 @@ var React = require('react');
 // A file which has `min.js` suffix might be blackboxed with debugger tools.
 // var React = require("react/dist/react.min");
 
-var HelloComponent = React.createClass({
+var Hello = React.createClass({
     render: function () {
         return <h1>Hello by React!</h1>;
     },
 });
 
-var Hello = React.createFactory(HelloComponent);
-
-React.render(<Hello/>, document.body);
+/* eslint-disable no-undef */
+React.render(<Hello />, document.body);
+/* eslint-enable */
 
 if (process.env.NODE_ENV === 'development') {
     console.log('development only');
