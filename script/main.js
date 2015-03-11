@@ -1,3 +1,6 @@
+/**
+ *  @flow
+ */
 /*
  * @license MIT License
  *

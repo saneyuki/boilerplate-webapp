@@ -24,17 +24,21 @@
 'use strict';
 
 let browserify = require('browserify');
+let ChildProcess = require('child_process');
 let eslint = require('gulp-eslint');
 let espowerify = require('espowerify');
 let envify = require('envify');
 let exorcist = require('exorcist'); // Split sourcemap into the file.
+let flow = require('flow-bin');
 let gulp = require('gulp');
+let path = require('path');
 let reactify = require('reactify');
 let sass = require('gulp-sass');
 let source = require('vinyl-source-stream');
 
 const isRelease = process.env.NODE_ENV === 'production';
 
+const SRC_JS_DIR = './script/';
 const SRC_JS = './script/main.js';
 const SRC_CSS = './style/main.scss';
 const DIST_BUILD_DIR = './build/';
@@ -80,7 +84,9 @@ gulp.task('js', ['jslint'], function() {
     };
 
     browserify(SRC_JS, option)
-        .transform(reactify)
+        .transform({
+            stripTypes: true,
+        }, reactify)
         .transform(envify)
         .bundle()
         .pipe(exorcist(DIST_JS_MAP_FILE))
@@ -100,6 +106,14 @@ gulp.task('espower', function() {
         .bundle()
         .pipe(source('bundle.js'))
         .pipe(gulp.dest(DIST_TEST_DIR));
+});
+
+gulp.task('typecheck', ['jslint'], function () {
+    let option = {
+        cwd: path.relative(__dirname, SRC_JS_DIR),
+        stdio: 'inherit',
+    };
+    ChildProcess.spawn(flow, ['check'], option);
 });
 
 gulp.task('jstest', ['espower', 'jslint'], function() {});
