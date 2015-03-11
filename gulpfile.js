@@ -23,13 +23,12 @@
  */
 'use strict';
 
+let babelify = require('babelify');
 let browserify = require('browserify');
 let eslint = require('gulp-eslint');
 let espowerify = require('espowerify');
-let envify = require('envify');
 let exorcist = require('exorcist'); // Split sourcemap into the file.
 let gulp = require('gulp');
-let reactify = require('reactify');
 let sass = require('gulp-sass');
 let source = require('vinyl-source-stream');
 
@@ -79,9 +78,14 @@ gulp.task('js', ['jslint'], function() {
         debug: !isRelease,
     };
 
+    let babel = babelify.configure({
+        optional: [
+            'utility.inlineEnvironmentVariables',
+        ],
+    });
+
     browserify(SRC_JS, option)
-        .transform(reactify)
-        .transform(envify)
+        .transform(babel)
         .bundle()
         .pipe(exorcist(DIST_JS_MAP_FILE))
         .pipe(source('bundle.js'))
