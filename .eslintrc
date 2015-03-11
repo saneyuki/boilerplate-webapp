@@ -3,14 +3,11 @@
     // http://eslint.org/docs/configuring/#comments-in-configuration-files
 
     "ecmaFeatures": {
-        "blockBindings": true,
-        "jsx": true
+        "blockBindings": true
     },
 
     "env": {
-        "browser": true,
-        "node": true,
-        "mocha": true
+        "node": true
     },
 
     "rules": {
