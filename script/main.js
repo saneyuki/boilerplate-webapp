@@ -1,3 +1,4 @@
+/** @jsx React.DOM */
 /*
  * @license MIT License
  *
@@ -23,6 +24,22 @@
  */
 
 'use strict';
+
+var React = require('react');
+// If you want the pre-mifinied react which has `min.js` suffix,
+// You should specify the minified react directly.
+// A file which has `min.js` suffix might be blackboxed with debugger tools.
+// var React = require("react/dist/react.min");
+
+var HelloComponent = React.createClass({
+    render: function () {
+        return <h1>Hello by React!</h1>;
+    },
+});
+
+var Hello = React.createFactory(HelloComponent);
+
+React.render(<Hello/>, document.body);
 
 if (process.env.NODE_ENV === 'development') {
     console.log('development only');

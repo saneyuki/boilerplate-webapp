@@ -29,6 +29,7 @@ var sass = require('gulp-sass');
 var browserify = require('browserify');
 var eslint = require('gulp-eslint');
 var espowerify = require('espowerify');
+var reactify = require('reactify');
 var source = require('vinyl-source-stream');
 var exorcist = require('exorcist'); // Split sourcemap into the file.
 
@@ -79,6 +80,7 @@ gulp.task('js', ['jslint'], function() {
     };
 
     browserify(SRC_JS, option)
+        .transform(reactify)
         .transform(envify)
         .bundle()
         .pipe(exorcist(DIST_JS_MAP_FILE))

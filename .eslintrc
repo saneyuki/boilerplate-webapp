@@ -3,7 +3,8 @@
     // http://eslint.org/docs/configuring/#comments-in-configuration-files
 
     "ecmaFeatures": {
-        "blockBindings": true
+        "blockBindings": true,
+        "jsx": true
     },
 
     "env": {
