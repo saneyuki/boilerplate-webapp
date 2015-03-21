@@ -10,6 +10,10 @@
         "node": true
     },
 
+    "plugins": [
+        "react" // for React/JSX
+    ],
+
     "rules": {
         // Possible Errors
         "comma-dangle": [0, "never"],
@@ -19,7 +23,7 @@
         "no-extra-parens": 0,
         "valid-jsdoc": [2, {
             "requireReturn": true,
-            "requireParamDescription": true,
+            "requireParamDescription": false,
             "requireReturnDescription": false
         }],
 
@@ -59,11 +63,26 @@
         "semi": [2, "always"],
         "space-unary-ops": [2, {
             "words": true,
-            "nonwords": true
+            "nonwords": false
         }],
         "spaced-line-comment": 2,
 
         // ECMAScript 6
-        "generator-star": [2, "start"]
+        "generator-star-spacing": [2, "after"],
+
+        // ESLint-plugin-React
+        // https://github.com/yannickcr/eslint-plugin-react
+        "react/no-multi-comp": 0,
+        // FIXME: disable until fix:
+        // https://github.com/yannickcr/eslint-plugin-react/issues/9
+        //"react/prop-types": 1,
+        "react/display-name": 0,
+        "react/wrap-multilines": 2,
+        "react/self-closing-comp": 2,
+        "react/no-did-mount-set-state": 1,
+        "react/no-did-update-set-state": 1,
+        "react/jsx-uses-react": 1,
+        "react/jsx-uses-vars": 1,
+        "react/react-in-jsx-scope": 1
     }
 }
