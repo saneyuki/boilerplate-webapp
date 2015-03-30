@@ -74,9 +74,7 @@
         // ESLint-plugin-React
         // https://github.com/yannickcr/eslint-plugin-react
         "react/no-multi-comp": 0,
-        // FIXME: disable until fix:
-        // https://github.com/yannickcr/eslint-plugin-react/issues/9
-        //"react/prop-types": 1,
+        "react/prop-types": 1,
         "react/display-name": 0,
         "react/wrap-multilines": 2,
         "react/self-closing-comp": 2,
