@@ -25,11 +25,11 @@
     "url": "YOUR REPOSITORY"
   },
   "dependencies": {
-    "react": "^0.13.0"
+    "react": "^0.13.1"
   },
   "devDependencies": {
     "browserify": "^9.0.3",
-    "envify": "^3.3.0",
+    "envify": "^3.4.0",
     "eslint-plugin-react": "^1.5.0",
     "espowerify": "^0.10.0",
     "exorcist": "^0.1.6",
@@ -40,11 +40,11 @@
     "karma-chrome-launcher": "^0.1.7",
     "karma-cli": "0.0.4",
     "karma-mocha": "^0.1.10",
-    "karma-mocha-reporter": "^1.0.0",
+    "karma-mocha-reporter": "^1.0.2",
     "mocha": "^2.2.1",
     "power-assert": "^0.10.0",
-    "reactify": "^1.0.0",
+    "reactify": "^1.1.0",
     "vinyl-source-stream": "^1.1.0",
-    "yargs": "^3.5.3"
+    "yargs": "^3.6.0"
   }
 }
