@@ -36,6 +36,7 @@ setup:
 update:
 	$(NPM) prune
 	$(NPM) update
+	$(NODE_MODULES)/.bin/tsd reinstall
 
 # lint
 lint:
