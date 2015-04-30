@@ -71,6 +71,7 @@
 
         // ECMAScript 6
         "generator-star-spacing": [2, "after"],
+        "object-shorthand": 0,
 
         // ESLint-plugin-React
         // https://github.com/yannickcr/eslint-plugin-react
