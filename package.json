@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "description": "YOUR PROJECT DESCRIPTION.",
   "scripts": {
-    "lint": "./node_modules/.bin/gulp jslint",
-    "build": "./node_modules/.bin/gulp build",
-    "pretest": "./node_modules/.bin/gulp jstest",
+    "lint": "gulp jslint",
+    "build": "gulp build",
+    "pretest": "gulp jstest",
     "test": "node ./launch_test.js",
     "posttest": "rm -rf ./powered-test/"
   },
