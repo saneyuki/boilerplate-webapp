@@ -23,10 +23,19 @@
 #
 
 NPM = npm
+NODE_MODULES = ./node_modules
 
 .PHONY: all lint build release test
 
 all: help
+
+setup:
+	rm -rf $(NODE_MODULES)
+	$(NPM) install
+
+update:
+	$(NPM) prune
+	$(NPM) update
 
 # lint
 lint:
