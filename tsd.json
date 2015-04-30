@@ -3,6 +3,5 @@
   "repo": "borisyankov/DefinitelyTyped",
   "ref": "master",
   "path": "typings",
-  "bundle": "typings/tsd.d.ts",
-  "installed": {}
+  "bundle": "typings/tsd.d.ts"
 }

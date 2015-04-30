@@ -1,4 +1,4 @@
-/*
+/**
  * @license MIT License
  *
  * Copyright (c) 2014 Tetsuharu OHZEKI <saneyuki.snyk@gmail.com>
@@ -22,28 +22,13 @@
  * THE SOFTWARE.
  */
 
-'use strict';
+/// <reference path="../node_modules/rx/ts/rx.d.ts" />
+import Rx = require('rx');
 
-var React = require('react');
-
-// If you want the pre-mifinied react which has `min.js` suffix,
-// You should specify the minified react directly.
-// A file which has `min.js` suffix might be blackboxed with debugger tools.
-// var React = require("react/dist/react.min");
-
-var Hello = React.createClass({
-    render: function () {
-        return <h1>Hello by React!</h1>;
-    },
+let o: Rx.Observable<number> = Rx.Observable.create<number>((observer) => {
+    let i = 1;
+    window.setInterval(() => {
+        i = i * 10;
+        observer.onNext(i);
+    }, 200);
 });
-
-/* eslint-disable no-undef */
-React.render(<Hello />, document.body);
-/* eslint-enable */
-
-if (process.env.NODE_ENV === 'development') {
-    console.log('development only');
-}
-else {
-    console.log('production only');
-}
