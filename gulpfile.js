@@ -76,7 +76,7 @@ gulp.task('jslint', function(){
 gulp.task('js', ['jslint'], function() {
     let option = {
         insertGlobals: false,
-        debug: isRelease ? false : true,
+        debug: !isRelease,
     };
 
     browserify(SRC_JS, option)
