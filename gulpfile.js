@@ -23,14 +23,14 @@
  */
 'use strict';
 
-let babelify = require('babelify');
-let browserify = require('browserify');
-let eslint = require('gulp-eslint');
-let espowerify = require('espowerify');
-let exorcist = require('exorcist'); // Split sourcemap into the file.
-let gulp = require('gulp');
-let sass = require('gulp-sass');
-let source = require('vinyl-source-stream');
+const babelify = require('babelify');
+const browserify = require('browserify');
+const eslint = require('gulp-eslint');
+const espowerify = require('espowerify');
+const exorcist = require('exorcist'); // Split sourcemap into the file.
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const source = require('vinyl-source-stream');
 
 const isRelease = process.env.NODE_ENV === 'production';
 
@@ -43,7 +43,7 @@ const SRC_TEST_MANIFEST = './test/manifest.js';
 const DIST_TEST_DIR = './powered-test/';
 
 gulp.task('css', function() {
-    let option = {
+    const option = {
         errLogToConsole: true,
         // sourcemap
         sourceComments: isRelease ? 'none' : 'map',
@@ -57,7 +57,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('jslint', function(){
-    let option = {
+    const option = {
         useEslintrc: true,
     };
 
@@ -73,12 +73,12 @@ gulp.task('jslint', function(){
 });
 
 gulp.task('js', ['jslint'], function() {
-    let option = {
+    const option = {
         insertGlobals: false,
         debug: !isRelease,
     };
 
-    let babel = babelify.configure({
+    const babel = babelify.configure({
         optional: [
             'utility.inlineEnvironmentVariables',
         ],
@@ -93,7 +93,7 @@ gulp.task('js', ['jslint'], function() {
 });
 
 gulp.task('espower', function() {
-    let option = {
+    const option = {
         insertGlobals: false,
         debug: true,
     };
