@@ -69,7 +69,7 @@ gulp.task('css', function() {
         outputStyle: 'expanded',
     };
 
-    gulp.src(SRC_CSS)
+    return gulp.src(SRC_CSS)
         .pipe(sass(option))
         .pipe(gulp.dest(DIST_BUILD_DIR));
 });
@@ -111,7 +111,7 @@ gulp.task('js', ['jslint'], function() {
         ],
     });
 
-    browserify(SRC_JS, option)
+    return browserify(SRC_JS, option)
         .transform(babel)
         .bundle()
         .pipe(exorcist(DIST_JS_MAP_FILE))
@@ -125,7 +125,7 @@ gulp.task('espower', function() {
         debug: true,
     };
 
-    browserify(option)
+    return browserify(option)
         .add(SRC_TEST_MANIFEST)
         .transform(espowerify)
         .bundle()
