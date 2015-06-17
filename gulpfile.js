@@ -1,4 +1,4 @@
-/*
+/**
  * @license MIT License
  *
  * Copyright (c) 2014 Tetsuharu OHZEKI <saneyuki.snyk@gmail.com>
@@ -20,6 +20,20 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
+ */
+/**
+ *  # The rules of task name
+ *
+ *  ## public task
+ *  - This is completed in itself.
+ *  - This is callable as `gulp <taskname>`.
+ *
+ *  ## private task
+ *  - This has some sideeffect in dependent task trees
+ *    and it cannot recovery by self.
+ *  - This is __callable only from public task__.
+ *    DONT CALL as `gulp <taskname>`.
+ *  - MUST name `__taskname`.
  */
 'use strict';
 
