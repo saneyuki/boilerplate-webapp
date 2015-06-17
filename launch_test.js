@@ -24,22 +24,22 @@
 
 'use strict';
 
-let argv = require('yargs').argv;
-let ChildProcess = require('child_process');
-let EventEmitter = require('events').EventEmitter;
-let os = require('os');
-let Path = require('path');
+const argv = require('yargs').argv;
+const ChildProcess = require('child_process');
+const EventEmitter = require('events').EventEmitter;
+const os = require('os');
+const Path = require('path');
 
 const MOCK_PORT = 9001;
 
-let master = new EventEmitter();
+const master = new EventEmitter();
 
-let spawn = function (name, args) {
-    let process = new Promise(function(resolve, reject) {
-        let child = ChildProcess.spawn(name, args, {
+const spawn = function (name, args) {
+    const process = new Promise(function(resolve, reject) {
+        const child = ChildProcess.spawn(name, args, {
             stdio: 'inherit',
         });
-        let killSelf = function() {
+        const killSelf = function() {
             child.kill();
         };
         child.addListener('exit', function listener() {
@@ -53,7 +53,7 @@ let spawn = function (name, args) {
     return process;
 };
 
-let mock = spawn('node', [Path.join(__dirname, 'test_mock', 'server.js'), '--port', MOCK_PORT]);
+const mock = spawn('node', [Path.join(__dirname, 'test_mock', 'server.js'), '--port', MOCK_PORT]);
 console.log('you can access mock server with `localhost:' + MOCK_PORT + '`');
 
 let karma = null;
@@ -61,8 +61,8 @@ if (argv.onlyMock) {
     karma = Promise.resolve();
 }
 else {
-    let suffix = (os.platform() === 'win32') ? '.cmd' : '';
-    let karmaBin = Path.join(__dirname, 'node_modules', '.bin', 'karma' + suffix);
+    const suffix = (os.platform() === 'win32') ? '.cmd' : '';
+    const karmaBin = Path.join(__dirname, 'node_modules', '.bin', 'karma' + suffix);
     karma = spawn(karmaBin, ['start', (argv.debug ? '' : '--single-run')]);
 }
 
