@@ -1,4 +1,4 @@
-/*
+/**
  * @license MIT License
  *
  * Copyright (c) 2014 Tetsuharu OHZEKI <saneyuki.snyk@gmail.com>
@@ -21,18 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/**
+ *  # The rules of task name
+ *
+ *  ## public task
+ *  - This is completed in itself.
+ *  - This is callable as `gulp <taskname>`.
+ *
+ *  ## private task
+ *  - This has some sideeffect in dependent task trees
+ *    and it cannot recovery by self.
+ *  - This is __callable only from public task__.
+ *    DONT CALL as `gulp <taskname>`.
+ *  - MUST name `__taskname`.
+ */
 'use strict';
 
-let babelify = require('babelify');
-let browserify = require('browserify');
-let eslint = require('gulp-eslint');
-let espowerify = require('espowerify');
-let exorcist = require('exorcist'); // Split sourcemap into the file.
-let gulp = require('gulp');
-let sass = require('gulp-sass');
-let source = require('vinyl-source-stream');
+const babelify = require('babelify');
+const browserify = require('browserify');
+const childProcess = require('child_process');
+const espowerify = require('espowerify');
+const exorcist = require('exorcist'); // Split sourcemap into the file.
+const gulp = require('gulp');
+const path = require('path');
+const sass = require('gulp-sass');
+const source = require('vinyl-source-stream');
 
 const isRelease = process.env.NODE_ENV === 'production';
+
+const NODE_BIN = 'iojs';
+const NPM_MOD_DIR = path.resolve(__dirname, './node_modules/');
 
 const SRC_JS = './script/main.js';
 const SRC_CSS = './style/main.scss';
@@ -43,7 +61,7 @@ const SRC_TEST_MANIFEST = './test/manifest.js';
 const DIST_TEST_DIR = './powered-test/';
 
 gulp.task('css', function() {
-    let option = {
+    const option = {
         errLogToConsole: true,
         // sourcemap
         sourceComments: isRelease ? 'none' : 'map',
@@ -51,40 +69,49 @@ gulp.task('css', function() {
         outputStyle: 'expanded',
     };
 
-    gulp.src(SRC_CSS)
+    return gulp.src(SRC_CSS)
         .pipe(sass(option))
         .pipe(gulp.dest(DIST_BUILD_DIR));
 });
 
-gulp.task('jslint', function(){
-    let option = {
-        useEslintrc: true,
-    };
-
-    return gulp.src([
+gulp.task('jslint', function(callback){
+    const src = [
         './gulpfile.js',
         './launch_test.js',
-        './script/**/*.js',
-        './test/**/*.js',
-        './test_mock/**/*.js'])
-        .pipe(eslint(option))
-        .pipe(eslint.format())
-        .pipe(eslint.failOnError());
+        './script/',
+        './test/',
+        './test_mock/',
+    ];
+
+    const bin = path.resolve(NPM_MOD_DIR, './eslint', './bin', './eslint.js');
+
+    const args = [
+        bin,
+        '--ext', '.js',
+    ].concat(src);
+
+    const option = {
+        cwd: path.relative(__dirname, ''),
+        stdio: 'inherit',
+    };
+
+    const eslint = childProcess.spawn(NODE_BIN, args, option);
+    eslint.on('exit', callback);
 });
 
 gulp.task('js', ['jslint'], function() {
-    let option = {
+    const option = {
         insertGlobals: false,
         debug: !isRelease,
     };
 
-    let babel = babelify.configure({
+    const babel = babelify.configure({
         optional: [
             'utility.inlineEnvironmentVariables',
         ],
     });
 
-    browserify(SRC_JS, option)
+    return browserify(SRC_JS, option)
         .transform(babel)
         .bundle()
         .pipe(exorcist(DIST_JS_MAP_FILE))
@@ -93,12 +120,12 @@ gulp.task('js', ['jslint'], function() {
 });
 
 gulp.task('espower', function() {
-    let option = {
+    const option = {
         insertGlobals: false,
         debug: true,
     };
 
-    browserify(option)
+    return browserify(option)
         .add(SRC_TEST_MANIFEST)
         .transform(espowerify)
         .bundle()
