@@ -39,14 +39,18 @@
 
 const babelify = require('babelify');
 const browserify = require('browserify');
-const eslint = require('gulp-eslint');
+const childProcess = require('child_process');
 const espowerify = require('espowerify');
 const exorcist = require('exorcist'); // Split sourcemap into the file.
 const gulp = require('gulp');
+const path = require('path');
 const sass = require('gulp-sass');
 const source = require('vinyl-source-stream');
 
 const isRelease = process.env.NODE_ENV === 'production';
+
+const NODE_BIN = 'iojs';
+const NPM_MOD_DIR = path.resolve(__dirname, './node_modules/');
 
 const SRC_JS = './script/main.js';
 const SRC_CSS = './style/main.scss';
@@ -70,20 +74,29 @@ gulp.task('css', function() {
         .pipe(gulp.dest(DIST_BUILD_DIR));
 });
 
-gulp.task('jslint', function(){
-    const option = {
-        useEslintrc: true,
-    };
-
-    return gulp.src([
+gulp.task('jslint', function(callback){
+    const src = [
         './gulpfile.js',
         './launch_test.js',
-        './script/**/*.js',
-        './test/**/*.js',
-        './test_mock/**/*.js'])
-        .pipe(eslint(option))
-        .pipe(eslint.format())
-        .pipe(eslint.failOnError());
+        './script/',
+        './test/',
+        './test_mock/',
+    ];
+
+    const bin = path.resolve(NPM_MOD_DIR, './eslint', './bin', './eslint.js');
+
+    const args = [
+        bin,
+        '--ext', '.js',
+    ].concat(src);
+
+    const option = {
+        cwd: path.relative(__dirname, ''),
+        stdio: 'inherit',
+    };
+
+    const eslint = childProcess.spawn(NODE_BIN, args, option);
+    eslint.on('exit', callback);
 });
 
 gulp.task('js', ['jslint'], function() {
